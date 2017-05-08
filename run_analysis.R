@@ -86,7 +86,7 @@ test <- cbind(testSubjects, testActRaw, test)
 test$source <- c("test")
 
 #combine train and test using row bind function
-testTrainData <- merge(train, test, by.x = subject)
+testTrainData <- rbind(train, test)
 
 ##since the subject dataset was first, the first column is the subject id
 ##the second column is the activity
@@ -105,4 +105,15 @@ testTrainMeltData.mean <- dcast(testTrainMeltData, subject + activity ~ variable
 
 ##5. From the data set in step 4, creates a second, independent tidy data 
 ##set with the average of each variable for each activity and each subject.
-write.table(testTrainMeltData.mean, "tidy.txt", row.names = FALSE, quote = FALSE)
+write.table(testTrainMeltData.mean, "././tidy.txt", row.names = FALSE, quote = FALSE)
+
+##create a codebook 
+##library(memisc)
+##tiTxt <- as.data.frame(readLines("././tidy.txt"))
+##description(tiTxt) <- "Measures and activities for subjects "
+##wording(tiTxt) <- "Testing"
+##annotation(tiTxt)
+##annotation(tiTxt)["Remark"] <- "This is not a real questionnaire item, of course ..."
+##show_html(x, output = NULL, ...)
+##write_html(tiTxt)
+##codebook(tiTxt)
